@@ -35,13 +35,19 @@ st.title("Data Visualization App")
 @st.cache_data(
     ttl=15 * 60
 )  # This decorator caches the data to prevent reloading on every interaction.
+#def load_data(lag_days: int):
+ #   load_data_from_lag_to_today(lag_days)
+   # main_process()
+  #  data = pd.read_csv(
+     #   fic_export_data, parse_dates=[col_date]
+    #  # Adjust 'DateColumn' to your date column name*
+   # return data
+@st.cache_data(
+    ttl=15 * 60
+)
 def load_data(lag_days: int):
-    load_data_from_lag_to_today(lag_days)
-    main_process()
-    data = pd.read_csv(
-        fic_export_data, parse_dates=[col_date]
-    )  # Adjust 'DateColumn' to your date column name*
-    return data
+    df = load_data_for_last_7_days()
+    return df
 
 
 # Assuming your CSV is named 'data.csv' and is in the same directory as your app.py

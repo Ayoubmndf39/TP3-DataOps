@@ -4,6 +4,7 @@ import os
 import glob
 from pathlib import Path
 import json
+import datetime
 
 col_date: str = "date_heure"
 col_donnees: str = "consommation"
@@ -56,3 +57,9 @@ if __name__ == "__main__":
 
     # data_file: str = "data/raw/eco2mix-regional-tr.csv"
     main_process()
+
+    def load_data_for_last_7_days():
+    df = load_data()
+    today = datetime.datetime.now().date()
+    last_7_days = df[df[col_date].dt.date >= (today - datetime.timedelta(days=7))]
+    return last_7_days
