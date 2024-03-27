@@ -73,7 +73,7 @@ st.plotly_chart(fig)
 st.subheader("Bar Chart of Total Consumption Per Week")
 
 # Aggregate data by week
-weekly_consumption = df.groupby(df[col_date].dt.week)['consommation'].sum()
+weekly_consumption = df.set_index(col_date).resample('W')[col_donnees].sum()
 
 # Create a bar chart using Plotly
 fig_bar = px.bar(x=weekly_consumption.index, y=weekly_consumption.values, labels={'x':'Week', 'y':'Total Consumption'}, title="Total Consumption Per Week")
