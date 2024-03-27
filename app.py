@@ -68,3 +68,13 @@ numerical_column = col_donnees
 # Create interactive line chart using Plotly
 fig = px.line(df, x=col_date, y=col_donnees, title="Consommation en fonction du temps")
 st.plotly_chart(fig)
+
+# Create a bar chart showing total consumption per week
+st.subheader("Bar Chart of Total Consumption Per Week")
+
+# Aggregate data by week
+weekly_consumption = df.groupby(df[col_date].dt.week)['consommation'].sum()
+
+# Create a bar chart using Plotly
+fig_bar = px.bar(x=weekly_consumption.index, y=weekly_consumption.values, labels={'x':'Week', 'y':'Total Consumption'}, title="Total Consumption Per Week")
+st.plotly_chart(fig_bar)

@@ -41,12 +41,16 @@ def export_data(df: pd.DataFrame):
     os.makedirs("data/interim/", exist_ok=True)
     df.to_csv(fic_export_data, index=False)
 
+def aggregate_weekly_consumption(df: pd.DataFrame):
+    weekly_consumption = df.resample('W', on=col_date)[col_donnees].sum()
+    return weekly_consumption
 
 def main_process():
     df: pd.DataFrame = load_data()
     df = format_data(df)
     export_data(df)
 
+ 
 
 if __name__ == "__main__":
 
